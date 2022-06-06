@@ -14,6 +14,7 @@ class Parokia(models.Model):
         Klerus,
         on_delete=models.RESTRICT,
         null=True,
+        blank=True,
         verbose_name='Nama Klerus'
     )
 
