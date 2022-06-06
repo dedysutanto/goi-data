@@ -19,8 +19,8 @@ class BaptisAdmin(admin.ModelAdmin):
     )
 
     list_display = ['number', 'member', 'baptis_parent', 'baptis_klerus', 'baptis_name', 'baptis_date', 'baptis_anniversary']
-    search_fields = ('number', 'member__name', 'baptis_parent__name',
-                     'baptis_klerus__name__name', 'baptis_klerus__name__baptis_name')
+    search_fields = ('number', 'member__name', 'member__baptis_name',
+                     'baptis_parent__name', 'baptis_klerus__name__name', 'baptis_klerus__name__baptis_name')
     ordering = ['number']
     list_per_page = 25
 
