@@ -46,7 +46,7 @@ class MemberAdmin(admin.ModelAdmin):
         }),
     )
 
-    list_display = ['__str__', 'dob', 'baptis_name', 'phone', 'email', 'photo_display']
+    list_display = ['__str__', 'dob', 'baptis_name', 'father', 'mother', 'photo_display']
     photo_display = AdminThumbnail(image_field='photo_thumbnail')
     photo_display.short_description = 'Photo Thumbnail'
     readonly_fields = ['photo_display', 'is_klerus',
