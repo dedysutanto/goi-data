@@ -1,0 +1,6 @@
+#!/bin/bash
+# It must be run from screen
+
+source .env
+
+gunicorn -c config/gunicorn.conf.py config.wsgi
