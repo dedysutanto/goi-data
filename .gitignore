@@ -135,3 +135,12 @@ GitHub.sublime-settings
 !.vscode/launch.json
 !.vscode/extensions.json
 .history
+
+# static file
+/static
+
+# media file
+/media
+
+# backup
+/backup
