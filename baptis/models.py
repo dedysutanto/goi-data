@@ -2,6 +2,7 @@ from django.db import models
 from parokia.models import Parokia
 from member.models import Member
 from klerus.models import Klerus
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 
 
 class Baptis(models.Model):
@@ -46,9 +47,13 @@ class Baptis(models.Model):
     def save(self, *args, **kwargs):
         self.number = self.number.upper()
         self.baptis_name = self.baptis_name.upper()
-        member = Member.objects.get(id=self.member.id)
-        member.baptis_name = self.baptis_name
-        member.baptis_anniversary = self.baptis_anniversary
-        member.baptis_date = self.baptis_date
-        member.save()
+        try:
+            member = Member.objects.get(id=self.member.id)
+            member.baptis_number = self.number
+            member.baptis_name = self.baptis_name
+            member.baptis_anniversary = self.baptis_anniversary
+            member.baptis_date = self.baptis_date
+            member.save()
+        except ObjectDoesNotExist:
+            raise ValidationError({'member': [_('Yang Dibaptis Tidak Boleh Kosong!')]})
         return super(Baptis, self).save(*args, **kwargs)

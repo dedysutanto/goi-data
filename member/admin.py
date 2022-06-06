@@ -3,6 +3,7 @@ from .models import Member
 from django_google_maps import widgets as map_widgets
 from django_google_maps import fields as map_fields
 from django import forms
+from imagekit.admin import AdminThumbnail
 
 
 class MemberAdmin(admin.ModelAdmin):
@@ -24,7 +25,8 @@ class MemberAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('name', ('pob', 'dob'),)
+            'classes': ('',),
+            'fields': ('name', ('pob', 'dob'), 'photo', 'photo_display')
         }),
         ('Orang Tua', {
             'classes': ('collapse',),
@@ -36,10 +38,13 @@ class MemberAdmin(admin.ModelAdmin):
         }),
         ('Baptis', {
             'classes': ('collapse',),
-            'fields': ('baptis_name', 'baptis_anniversary', 'baptis_date',),
+            'fields': ('baptis_number', 'baptis_name', 'baptis_anniversary', 'baptis_date',),
         }),
     )
-    list_display = ['name', 'pob', 'dob', 'address', 'phone', 'email']
+    list_display = ['name', 'pob', 'dob', 'address', 'phone', 'email', 'photo_display']
+    photo_display = AdminThumbnail(image_field='photo_thumbnail')
+    photo_display.short_description = 'Photo Thumbnail'
+    readonly_fields = ['photo_display']
     search_fields = ('name', 'dob')
 
     class Meta:

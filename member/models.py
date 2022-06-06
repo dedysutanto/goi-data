@@ -1,9 +1,10 @@
 from django.db import models
 from klerus.models import Klerus
-#import baptis.models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django_google_maps import fields as map_fields
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
 
 
 @receiver(post_save, sender=Klerus)
@@ -21,6 +22,12 @@ class Member(models.Model):
     father = models.CharField(max_length=50, blank=True, verbose_name='Nama Ayah')
     mother = models.CharField(max_length=50, blank=True, verbose_name='Nama Ibu')
 
+    photo = models.ImageField(blank=True, upload_to='member', verbose_name='Photo')
+    photo_thumbnail = ImageSpecField(source='photo',
+                                      processors=[ResizeToFill(60, 90)],
+                                      format='JPEG',
+                                      options={'quality': 60})
+
     email = models.EmailField(max_length=20, blank=True, verbose_name='Alamat Email')
     phone = models.CharField(max_length=20, blank=True, verbose_name='Telpon/HP')
     address = map_fields.AddressField(max_length=200, blank=True, verbose_name='Alamat')
@@ -28,6 +35,7 @@ class Member(models.Model):
 
     is_alive = models.BooleanField(default=True, verbose_name='Hidup/Almarhum')
 
+    baptis_number = models.CharField(max_length=30, verbose_name='Nomor Sertifikat Baptis', blank=True)
     baptis_name = models.CharField(max_length=30, blank=True, verbose_name='Nama Baptis')
     baptis_anniversary = models.DateField(null=True, blank=True, verbose_name='Tanggal Peringatan')
     baptis_date = models.DateField(null=True, blank=True, verbose_name='Tanggal Baptis')
@@ -53,4 +61,6 @@ class Member(models.Model):
             self.pob = self.pob.upper()
 
         return super(Member, self).save(*args, **kwargs)
+
+
 

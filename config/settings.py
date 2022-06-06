@@ -24,13 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-e5p9ixukbpyrn*kaume#prmvdi*-(k-@)=!tm0d*1)9+%n=iux'
+SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't')
+PRODUCTION = os.getenv('PRODUCTION', 'False').lower() in ('true', '1', 't')
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [str(os.getenv('ALLOWED_HOSTS'))]
 
 # Application definition
 
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'parokia',
     'member',
     'baptis',
+    'imagekit',
     'django_google_maps',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -125,6 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -134,3 +136,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # MAP
 GOOGLE_MAPS_API_KEY = str(os.getenv(('GOOGLE_MAPS_API_KEY')))
 MAPS_CENTER = 'lat: -1.233982000061532, lng: 116.83728437200422'
+
+# Upload File
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
