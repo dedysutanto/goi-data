@@ -51,7 +51,7 @@ class MemberAdmin(admin.ModelAdmin):
     readonly_fields = ['photo_display', 'is_klerus',
                        'baptis_number', 'baptis_name',
                        'baptis_anniversary', 'baptis_date']
-    search_fields = ('name', 'dob')
+    search_fields = ('name', 'baptis_name', 'dob')
     list_per_page = 25
 
     class Meta:
