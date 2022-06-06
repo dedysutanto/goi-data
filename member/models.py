@@ -1,22 +1,22 @@
 from django.db import models
-from klerus.models import Klerus
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 from django_google_maps import fields as map_fields
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 
 
+"""
 @receiver(post_save, sender=Klerus)
 def auto_create_member(sender, instance, created, **kwargs):
     if created:
         member = Member(name=instance.name)
+        member.baptis_name = instance.baptis_name
         member.save()
+"""
 
 
 class Member(models.Model):
 
-    name = models.CharField(max_length=50, verbose_name='Nama Lengkap')
+    name = models.CharField(max_length=50, unique=True, verbose_name='Nama Lengkap')
     dob = models.DateField(null=True, blank=True, verbose_name='Tanggal Lahir')
     pob = models.CharField(max_length=50, blank=True, verbose_name='Tempat Lahir')
     father = models.CharField(max_length=50, blank=True, verbose_name='Nama Ayah')
@@ -33,7 +33,10 @@ class Member(models.Model):
     address = map_fields.AddressField(max_length=200, blank=True, verbose_name='Alamat')
     geolocation = map_fields.GeoLocationField(max_length=100, blank=True, verbose_name='Koordinat GoogleMap')
 
-    is_alive = models.BooleanField(default=True, verbose_name='Hidup/Almarhum')
+    is_alive = models.BooleanField(default=True, verbose_name='Masih Hidup')
+    is_klerus = models.BooleanField(default=False, verbose_name='Klerus')
+    jabatan_klerus = models.CharField(max_length=20, blank=True, verbose_name='Jabatan Klerus')
+    description = models.TextField(blank=True, verbose_name='Catatan')
 
     baptis_number = models.CharField(max_length=30, verbose_name='Nomor Sertifikat Baptis', blank=True)
     baptis_name = models.CharField(max_length=30, blank=True, verbose_name='Nama Baptis')
@@ -49,7 +52,12 @@ class Member(models.Model):
         verbose_name_plural = 'Daftar Anggota'
 
     def __str__(self):
-        return '%s' % self.name
+        if self.is_klerus:
+            complete_name = '%s %s %s' % (self.jabatan_klerus, self.baptis_name, self.name)
+        else:
+            complete_name = '%s %s' % (self.baptis_name, self.name)
+
+        return complete_name
 
     def save(self, *args, **kwargs):
         self.name = self.name.upper()

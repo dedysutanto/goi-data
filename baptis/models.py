@@ -9,25 +9,33 @@ class Baptis(models.Model):
     parokia = models.ForeignKey(
         Parokia,
         on_delete=models.RESTRICT,
-        verbose_name='Nama Parokia'
+        verbose_name='Nama Parokia',
+        null=True,
+        blank=True
     )
-    number = models.CharField(max_length=30, verbose_name='Nomor Sertifikat Baptis')
+    number = models.CharField(max_length=30, unique=True, verbose_name='Nomor Sertifikat Baptis')
     member = models.ForeignKey(
         Member,
         on_delete=models.RESTRICT,
         related_name='baptis_member_related',
-        verbose_name='Yang Di Baptis'
+        verbose_name='Yang Di Baptis',
+        null=True,
+        blank=True
     )
     baptis_parent = models.ForeignKey(
         Member,
         on_delete=models.RESTRICT,
         related_name='baptis_parent_related',
-        verbose_name='Orang Tua Baptis'
+        verbose_name='Orang Tua Baptis',
+        null=True,
+        blank=True
     )
     baptis_klerus = models.ForeignKey(
         Klerus,
         on_delete=models.RESTRICT,
-        verbose_name='Klerus Yang Membaptis'
+        verbose_name='Klerus Yang Membaptis',
+        null=True,
+        blank=True
     )
     baptis_name = models.CharField(max_length=30, blank=True, verbose_name='Nama Baptis')
     baptis_anniversary = models.DateField(null=True, blank=True, verbose_name='Tanggal Peringatan')

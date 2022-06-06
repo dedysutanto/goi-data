@@ -40,12 +40,19 @@ class MemberAdmin(admin.ModelAdmin):
             'classes': ('collapse',),
             'fields': ('baptis_number', 'baptis_name', 'baptis_anniversary', 'baptis_date',),
         }),
+        ('Informasi Tambahan', {
+            'classes': ('collapse',),
+            'fields': ('is_alive', 'is_klerus', 'description'),
+        }),
     )
-    list_display = ['name', 'pob', 'dob', 'address', 'phone', 'email', 'photo_display']
+    list_display = ['__str__', 'dob', 'address', 'phone', 'email', 'photo_display']
     photo_display = AdminThumbnail(image_field='photo_thumbnail')
     photo_display.short_description = 'Photo Thumbnail'
-    readonly_fields = ['photo_display']
+    readonly_fields = ['photo_display', 'is_klerus',
+                       'baptis_number', 'baptis_name',
+                       'baptis_anniversary', 'baptis_date']
     search_fields = ('name', 'dob')
+    list_per_page = 25
 
     class Meta:
         model = Member

@@ -3,8 +3,8 @@ from .models import Klerus
 
 
 class KlerusAdmin(admin.ModelAdmin):
-    search_fields = ('name',)
-    list_display = ['name']
+    #search_fields = ('name',)
+    list_display = ['__str__']
 
     class Meta:
         model = Klerus
