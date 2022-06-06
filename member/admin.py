@@ -45,14 +45,16 @@ class MemberAdmin(admin.ModelAdmin):
             'fields': ('is_alive', 'is_klerus', 'description'),
         }),
     )
+
     list_display = ['__str__', 'dob', 'address', 'phone', 'email', 'photo_display']
     photo_display = AdminThumbnail(image_field='photo_thumbnail')
     photo_display.short_description = 'Photo Thumbnail'
     readonly_fields = ['photo_display', 'is_klerus',
                        'baptis_number', 'baptis_name',
                        'baptis_anniversary', 'baptis_date']
-    search_fields = ('name', 'baptis_name', 'dob')
+    search_fields = ('name', 'baptis_name', 'jabatan_klerus', 'dob')
     list_per_page = 25
+    ordering = ['-jabatan_klerus', 'baptis_name', 'name']     # Doesn't work
 
     class Meta:
         model = Member
