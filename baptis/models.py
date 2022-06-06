@@ -1,0 +1,54 @@
+from django.db import models
+from parokia.models import Parokia
+from member.models import Member
+from klerus.models import Klerus
+
+
+class Baptis(models.Model):
+    parokia = models.ForeignKey(
+        Parokia,
+        on_delete=models.RESTRICT,
+        verbose_name='Nama Parokia'
+    )
+    number = models.CharField(max_length=30, verbose_name='Nomor Sertifikat Baptis')
+    member = models.ForeignKey(
+        Member,
+        on_delete=models.RESTRICT,
+        related_name='baptis_member_related',
+        verbose_name='Yang Di Baptis'
+    )
+    baptis_parent = models.ForeignKey(
+        Member,
+        on_delete=models.RESTRICT,
+        related_name='baptis_parent_related',
+        verbose_name='Orang Tua Baptis'
+    )
+    baptis_klerus = models.ForeignKey(
+        Klerus,
+        on_delete=models.RESTRICT,
+        verbose_name='Klerus Yang Membaptis'
+    )
+    baptis_name = models.CharField(max_length=30, blank=True, verbose_name='Nama Baptis')
+    baptis_anniversary = models.DateField(null=True, blank=True, verbose_name='Tanggal Peringatan')
+    baptis_date = models.DateField(null=True, blank=True, verbose_name='Tanggal Baptis')
+
+    created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
+
+    class Meta:
+        db_table = 'baptis'
+        verbose_name = 'Baptis'
+        verbose_name_plural = 'Daftar Baptis'
+        
+    def __str__(self):
+        return '%s' % self.number
+    
+    def save(self, *args, **kwargs):
+        self.number = self.number.upper()
+        self.baptis_name = self.baptis_name.upper()
+        member = Member.objects.get(id=self.member.id)
+        member.baptis_name = self.baptis_name
+        member.baptis_anniversary = self.baptis_anniversary
+        member.baptis_date = self.baptis_date
+        member.save()
+        return super(Baptis, self).save(*args, **kwargs)
