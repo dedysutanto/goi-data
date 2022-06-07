@@ -9,7 +9,7 @@ class Parokia(models.Model):
     address = map_fields.AddressField(max_length=200, blank=True, verbose_name='Alamat')
     geolocation = map_fields.GeoLocationField(max_length=100, blank=True, verbose_name='Koordinat GoogleMap')
     email = models.EmailField(max_length=20, blank=True, verbose_name='Alamat Email')
-    phone = models.CharField(max_length=20, verbose_name='Telpon/HP')
+    phone = models.CharField(max_length=20, verbose_name='Telpon/HP', blank=True)
     klerus = models.ForeignKey(
         Klerus,
         on_delete=models.RESTRICT,
