@@ -10,12 +10,21 @@ class Parokia(models.Model):
     geolocation = map_fields.GeoLocationField(max_length=100, blank=True, verbose_name='Koordinat GoogleMap')
     email = models.EmailField(max_length=20, blank=True, verbose_name='Alamat Email')
     phone = models.CharField(max_length=20, verbose_name='Telpon/HP', blank=True)
-    klerus = models.ForeignKey(
+    klerus_1 = models.ForeignKey(
         Klerus,
         on_delete=models.RESTRICT,
         null=True,
         blank=True,
-        verbose_name='Nama Klerus'
+        verbose_name='Nama Klerus 1',
+        related_name='parokia_klerus_1',
+    )
+    klerus_2 = models.ForeignKey(
+        Klerus,
+        on_delete=models.RESTRICT,
+        null=True,
+        blank=True,
+        verbose_name='Nama Klerus 2',
+        related_name='parokia_klerus_2',
     )
 
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)

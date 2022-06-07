@@ -7,7 +7,7 @@ from django import forms
 
 class ParokiaAdmin(admin.ModelAdmin):
     search_fields = ('name', 'code')
-    list_display = ['name', 'code', 'address', 'klerus', 'phone', 'email']
+    list_display = ['name', 'code', 'address', 'klerus_1', 'klerus_2']
 
     formfield_overrides = {
         map_fields.AddressField: {
