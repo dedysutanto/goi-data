@@ -102,7 +102,7 @@ function initMap() {
     marker = new google.maps.Marker({
       position: new google.maps.LatLng(parokia[count][2], parokia[count][3]),
       map: map,
-      title: parokia[count][0]
+      title: 'PAROKIA ' + parokia[count][0]
     });
 
     summary_content['parokia'].counter += 1;
@@ -148,7 +148,7 @@ function initMap() {
     marker = new google.maps.Marker({
       position: new google.maps.LatLng(komox[count][2], komox[count][3]),
       map: map,
-      title: komox[count][0]
+      title: 'KOMOX ' + komox[count][0]
     });
 
     summary_content['komox'].counter += 1;
