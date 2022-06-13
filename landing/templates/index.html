@@ -112,10 +112,23 @@ function initMap() {
         '<div id="siteNotice"></div>' +
         '<h2 id="firstHeading" class="firstHeading">' + parokia[count][0] + '</h2>' +
         '<div id="bodyContent">' +
-        '<p>' +
-        '<strong>Address:</strong> ' + parokia[count][4] + '<br />' +
-        '</p>' +
-        '</div>';
+        '<p>';
+        if (parokia[count][4].length != 0) {
+            contentString += '' + parokia[count][4] + '<br />';
+        }
+        if (parokia[count][5].length != 0) {
+            contentString += '' + parokia[count][5] + '<br />';
+        }
+        if (parokia[count][6].length != 0) {
+            contentString += '' + parokia[count][6] + '<br />';
+        }
+        if (parokia[count][7] != 'None') {
+            contentString += '' + parokia[count][7] + '<br />';
+        }
+        if (parokia[count][8] != 'None') {
+            contentString += '' + parokia[count][8] + '<br />';
+        }
+        contentString += '</p></div>';
 
 
     google.maps.event.addListener(marker, 'click', (function (marker, count) {
@@ -145,10 +158,23 @@ function initMap() {
         '<div id="siteNotice"></div>' +
         '<h2 id="firstHeading" class="firstHeading">' + komox[count][0] + '</h2>' +
         '<div id="bodyContent">' +
-        '<p>' +
-        '<strong>Address:</strong> ' + komox[count][4] + '<br />' +
-        '</p>' +
-        '</div>';
+        '<p>';
+        if (komox[count][4].length != 0) {
+            contentString += '' + komox[count][4] + '<br />';
+        }
+        if (komox[count][5].length != 0) {
+            contentString += '' + komox[count][5] + '<br />';
+        }
+        if (komox[count][6].length != 0) {
+            contentString += '' + komox[count][6] + '<br />';
+        }
+        if (komox[count][7] != 'None') {
+            contentString += '' + komox[count][7] + '<br />';
+        }
+        if (komox[count][8] != 'None') {
+            contentString += '' + komox[count][8] + '<br />';
+        }
+        contentString += '</p></div>';
 
 
     google.maps.event.addListener(marker, 'click', (function (marker, count) {
