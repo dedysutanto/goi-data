@@ -71,8 +71,8 @@ function initMap() {
 
   var komox = [
   {% for kom in komox %}
-['{{kom.name}}','{{kom.code}}',{{kom.geolocation}},'
-{{kom.address}}','{{kom.phone}}','{{kom.email}}',
+['{{kom.name}}','{{kom.code}}',{{kom.geolocation}},
+'{{kom.address}}','{{kom.phone}}','{{kom.email}}',
 '{{kom.koordinator_1}}', '{{kom.koordinator_2}}'],
   {% endfor %}
    ];
