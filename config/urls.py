@@ -9,7 +9,7 @@ admin.site.site_header = 'Gereja Orthodox Indonesia'
 
 urlpatterns = [
     path('', index, name='index'),
-    path('', RedirectView.as_view(url='/admin')),
+    #path('', RedirectView.as_view(url='/admin')),
     path('admin/', admin.site.urls),
 ]
 
