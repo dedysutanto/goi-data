@@ -1,0 +1,196 @@
+<html>
+<head>
+    <title>Gereja Orthodox Indonesia</title>
+    <style>
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+  background-color: grey;
+}
+#legend {
+  font-family: Arial, sans-serif;
+  background: #fff;
+  padding: 10px;
+  margin: 10px;
+  border: 3px solid #000;
+}
+
+#legend h3 {
+  margin-top: 0;
+}
+
+#legend img {
+  vertical-align: middle;
+}
+
+#summary {
+  font-family: Arial, sans-serif;
+  background: #fff;
+  padding: 10px;
+  margin: 10px;
+  border: 3px solid #000;
+}
+
+#summary h3 {
+  margin-top: 0;
+}
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<div id="legend"><h3>Legend</h3></div>
+<!--
+<div id="summary"><h3>Summary</h3></div>
+-->
+
+<script type="text/javascript">
+function initMap() {
+  //var center = {lat: -1.233982000061532, lng: 116.83728437200422};
+  var center = { {{ settings.MAPS_CENTER }} };
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 5.5,
+    center: center
+  });
+  //var marker = new google.maps.Marker({
+  //  position: center,
+  //  map: map
+  //});
+
+  var parokia = [
+  {% for par in parokia %}
+['{{par.name}}','{{par.code}}',{{par.geolocation}},
+'{{par.address}}','{{par.phone}}','{{par.email}}',
+'{{par.klerus_1}}', '{{par.klerus_2}}'],
+  {% endfor %}
+   ];
+
+  var komox = [
+  {% for kom in komox %}
+['{{kom.name}}','{{kom.code}}',{{kom.geolocation}},'
+{{kom.address}}','{{kom.phone}}','{{kom.email}}',
+'{{kom.koordinator_1}}', '{{kom.koordinator_2}}'],
+  {% endfor %}
+   ];
+
+
+  var infowindow =  new google.maps.InfoWindow({});
+  var marker, count;
+  const iconBase = "https://maps.google.com/mapfiles/ms/icons/";
+  const icons = {
+    parokia: {
+      name: "Parokia",
+      icon: iconBase + "green-dot.png",
+    },
+    komox: {
+      name: "Komox",
+      icon: iconBase + "yellow-dot.png",
+    },
+  };
+
+  summary_content = {
+    'parokia': { 'counter': 0, },
+    'komox': { 'counter': 0, },
+  };
+
+  // Parokia
+  for (count = 0; count < parokia.length; count++) {
+    marker = new google.maps.Marker({
+      position: new google.maps.LatLng(parokia[count][2], parokia[count][3]),
+      map: map,
+      title: parokia[count][0]
+    });
+
+    summary_content['parokia'].counter += 1;
+
+    let contentString =
+        '<div id="content">' +
+        '<div id="siteNotice"></div>' +
+        '<h2 id="firstHeading" class="firstHeading">' + parokia[count][0] + '</h2>' +
+        '<div id="bodyContent">' +
+        '<p>' +
+        '<strong>Address:</strong> ' + parokia[count][4] + '<br />' +
+        '</p>' +
+        '</div>';
+
+
+    google.maps.event.addListener(marker, 'click', (function (marker, count) {
+      return function () {
+        infowindow.setContent(contentString);
+        infowindow.open(map, marker);
+      }
+    })(marker, count));
+
+
+  // Komox
+  for (count = 0; count < komox.length; count++) {
+
+    marker = new google.maps.Marker({
+      position: new google.maps.LatLng(komox[count][2], komox[count][3]),
+      map: map,
+      title: komox[count][0]
+    });
+
+    summary_content['komox'].counter += 1;
+
+    let contentString =
+        '<div id="content">' +
+        '<div id="siteNotice"></div>' +
+        '<h2 id="firstHeading" class="firstHeading">' + komox[count][0] + '</h2>' +
+        '<div id="bodyContent">' +
+        '<p>' +
+        '<strong>Address:</strong> ' + komox[count][4] + '<br />' +
+        '</p>' +
+        '</div>';
+
+
+    google.maps.event.addListener(marker, 'click', (function (marker, count) {
+      return function () {
+        infowindow.setContent(contentString);
+        infowindow.open(map, marker);
+      }
+    })(marker, count));
+
+  }
+
+  const legend = document.getElementById("legend");
+
+  for (const key in icons) {
+    const type = icons[key];
+    const name = type.name;
+    const icon = type.icon;
+    const div = document.createElement("div");
+
+    div.innerHTML = '<img src="' + icon + '"> ' + name + '&nbsp;(' + summary_content[key].counter  + ')';
+    legend.appendChild(div);
+  }
+
+  map.controls[google.maps.ControlPosition.RIGHT_TOP].push(legend);
+
+/*
+  const summary = document.getElementById("summary");
+
+  for (const key in summary_content) {
+    const type = summary_content[key];
+    const counter = type.counter;
+    //const icon = type.icon;
+    const div = document.createElement("div");
+
+    div.innerHTML = '<h4>' + counter + ' => ' + key + '</h4>';
+    summary.appendChild(div);
+  }
+
+  map.controls[google.maps.ControlPosition.RIGHT_TOP].push(summary);
+*/
+  }
+}
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key={{ settings.GOOGLE_MAPS_API_KEY }}&callback=initMap">
+</script>
+</body>
+</html>

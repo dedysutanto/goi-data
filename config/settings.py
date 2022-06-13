@@ -36,6 +36,7 @@ ALLOWED_HOSTS = [str(os.getenv('ALLOWED_HOSTS'))]
 # Application definition
 
 INSTALLED_APPS = [
+    'landing',
     'klerus',
     'parokia',
     'member',
@@ -152,7 +153,7 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Only Django 4.0
-CSRF_TRUSTED_ORIGINS = ['https://*.gerejaorthodox.id', 'https://*.127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://*.gerejaorthodox.id', 'http://127.0.0.1:8000', 'http://localhost:8000']
 
 # Conjob
 CRONJOBS = [
