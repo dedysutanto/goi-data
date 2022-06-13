@@ -9,7 +9,7 @@ class Parokia(models.Model):
     code = models.CharField(max_length=10, unique=True, verbose_name='Kode Parokia')
     address = map_fields.AddressField(max_length=200, blank=True, verbose_name='Alamat')
     geolocation = map_fields.GeoLocationField(max_length=100, blank=True, verbose_name='Koordinat GoogleMap')
-    email = models.EmailField(max_length=20, blank=True, verbose_name='Alamat Email')
+    email = models.EmailField(max_length=50, blank=True, verbose_name='Alamat Email')
     phone = models.CharField(max_length=20, verbose_name='Telpon/HP', blank=True)
     klerus_1 = models.ForeignKey(
         Klerus,
@@ -50,7 +50,7 @@ class Komox(models.Model):
     code = models.CharField(max_length=10, unique=True, verbose_name='Kode Komox')
     address = map_fields.AddressField(max_length=200, blank=True, verbose_name='Alamat')
     geolocation = map_fields.GeoLocationField(max_length=100, blank=True, verbose_name='Koordinat GoogleMap')
-    email = models.EmailField(max_length=20, blank=True, verbose_name='Alamat Email')
+    email = models.EmailField(max_length=50, blank=True, verbose_name='Alamat Email')
     phone = models.CharField(max_length=20, verbose_name='Telpon/HP', blank=True)
     koordinator_1 = models.ForeignKey(
         Member,
