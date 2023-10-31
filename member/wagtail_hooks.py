@@ -1,3 +1,5 @@
+from wagtail.contrib.modeladmin.options import (
+    ModelAdmin, modeladmin_register, ButtonHelper, PermissionHelper)
 from django.utils.translation import gettext_lazy as _
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.views.snippets import SnippetViewSet
@@ -5,17 +7,23 @@ from wagtail.admin.panels import FieldPanel, MultiFieldPanel, FieldRowPanel, Obj
 from wagtailgeowidget import geocoders
 from wagtailgeowidget.panels import GeoAddressPanel, GoogleMapsPanel
 from .models import Member
+from imagekit.admin import AdminThumbnail
 
 
-class MemberSVS(SnippetViewSet):
+#class MemberSVS(SnippetViewSet):
+class MemberSVS(ModelAdmin):
     model = Member
     add_to_admin_menu = True
     menu_order = 200
     menu_label = _('Anggota')
-    icon = 'doc-full'
-    list_display = ['__str__', 'dob']
+    menu_icon = 'doc-full'
+    photo_display = AdminThumbnail(image_field='photo_thumbnail')
+    photo_display.short_description = 'Photo Thumbnail'
+    list_display = ['__str__', 'photo_display']
+    #list_display = ['__str__', 'dob']
     list_export = ['__str__', 'dob']
-    search_fields = ['name', 'baptis_name']
+    search_fields = ['name', 'baptis_name', 'jabatan_klerus']
+    #photo_display = AdminThumbnail(image_field='photo_thumbnail')
     panels = [
             MultiFieldPanel([
                 FieldPanel('name'),
@@ -33,6 +41,10 @@ class MemberSVS(SnippetViewSet):
                 GeoAddressPanel('address', geocoder=geocoders.GOOGLE_MAPS),
                 GoogleMapsPanel('geolocation', address_field='address'),
                 ], heading=_('Alamat')),
+            MultiFieldPanel([
+                FieldPanel('father'),
+                FieldPanel('mother')
+                ], heading=_('Data Orang Tua'), classname='collapsed'),
             MultiFieldPanel([
                 FieldRowPanel([
                     FieldPanel('baptis_name', read_only=True),
@@ -55,5 +67,6 @@ class MemberSVS(SnippetViewSet):
                 ], heading=_('Informasi Tambahan'), classname='collapsed')
             ]
 
-register_snippet(MemberSVS)
+#register_snippet(MemberSVS)
+modeladmin_register(MemberSVS)
 

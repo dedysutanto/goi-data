@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'modelcluster',
     'taggit',
     'wagtailgeowidget',
+    'wagtail_modeladmin',
 ]
 
 DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'

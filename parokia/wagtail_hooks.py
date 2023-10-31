@@ -1,4 +1,6 @@
 from django.utils.translation import gettext_lazy as _
+from wagtail.contrib.modeladmin.options import (
+    ModelAdmin, modeladmin_register, ButtonHelper, PermissionHelper)
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.views.snippets import SnippetViewSet
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel, FieldRowPanel, ObjectList
@@ -7,10 +9,11 @@ from wagtailgeowidget.panels import GeoAddressPanel, GoogleMapsPanel
 from .models import Parokia, Komox
 
 
-class ParokiaSVS(SnippetViewSet):
+#class ParokiaSVS(SnippetViewSet):
+class ParokiaSVS(ModelAdmin):
     model = Parokia
     add_to_admin_menu = True
-    icon = 'home'
+    menu_icon = 'home'
     menu_order = 100
     menu_label = _('Parokia')
     list_display = ['name', 'code', 'address', 'klerus_1', 'klerus_2']
@@ -32,5 +35,6 @@ class ParokiaSVS(SnippetViewSet):
                 ], heading=_('Klerus yang bertanggung jawab')),
             ]
 
-register_snippet(ParokiaSVS)
+#register_snippet(ParokiaSVS)
+modeladmin_register(ParokiaSVS)
 
