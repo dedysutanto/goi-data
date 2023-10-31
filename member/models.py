@@ -1,5 +1,6 @@
 from django.db import models
-from django_google_maps import fields as map_fields
+from django.utils.translation import gettext_lazy as _
+#from django_google_maps import fields as map_fields
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 
@@ -13,14 +14,20 @@ def auto_create_member(sender, instance, created, **kwargs):
         member.save()
 """
 
+GENDER = (
+        ('L', 'Laki-laki'),
+        ('P', 'Perempuan')
+        )
+
 
 class Member(models.Model):
 
-    name = models.CharField(max_length=50, unique=True, verbose_name='Nama Lengkap')
-    dob = models.DateField(null=True, blank=True, verbose_name='Tanggal Lahir')
-    pob = models.CharField(max_length=50, blank=True, verbose_name='Tempat Lahir')
-    father = models.CharField(max_length=50, blank=True, verbose_name='Nama Ayah')
-    mother = models.CharField(max_length=50, blank=True, verbose_name='Nama Ibu')
+    name = models.CharField(max_length=100, unique=True, verbose_name=_('Nama Lengkap'))
+    dob = models.DateField(null=True, blank=True, verbose_name=_('Tanggal Lahir'))
+    pob = models.CharField(max_length=50, blank=True, verbose_name=_('Tempat Lahir'))
+    father = models.CharField(max_length=50, blank=True, verbose_name=_('Nama Ayah'))
+    mother = models.CharField(max_length=50, blank=True, verbose_name=_('Nama Ibu'))
+    gender = models.CharField(max_length=5, choices=GENDER, verbose_name=_('Jenis Kelamin'))
 
     photo = models.ImageField(blank=True, upload_to='member', verbose_name='Photo')
     photo_thumbnail = ImageSpecField(source='photo',
@@ -28,18 +35,20 @@ class Member(models.Model):
                                       format='JPEG',
                                       options={'quality': 60})
 
-    email = models.EmailField(max_length=20, blank=True, verbose_name='Alamat Email')
+    email = models.EmailField(max_length=50, blank=True, verbose_name='Alamat Email')
     phone = models.CharField(max_length=20, blank=True, verbose_name='Telpon/HP')
-    address = map_fields.AddressField(max_length=200, blank=True, verbose_name='Alamat')
-    geolocation = map_fields.GeoLocationField(max_length=100, blank=True, verbose_name='Koordinat GoogleMap')
+    address = models.CharField(max_length=250, blank=True, verbose_name='Alamat')
+    geolocation = models.CharField(max_length=250, blank=True, verbose_name='Koordinat GoogleMap')
+    #address = map_fields.AddressField(max_length=300, blank=True, verbose_name='Alamat')
+    #geolocation = map_fields.GeoLocationField(max_length=100, blank=True, verbose_name='Koordinat GoogleMap')
 
     is_alive = models.BooleanField(default=True, verbose_name='Masih Hidup')
     is_klerus = models.BooleanField(default=False, verbose_name='Klerus')
     jabatan_klerus = models.CharField(max_length=20, blank=True, verbose_name='Jabatan Klerus')
     description = models.TextField(blank=True, verbose_name='Catatan')
 
-    baptis_number = models.CharField(max_length=30, verbose_name='Nomor Sertifikat Baptis', blank=True)
-    baptis_name = models.CharField(max_length=30, blank=True, verbose_name='Nama Baptis')
+    baptis_number = models.CharField(max_length=30, verbose_name='Nomor Sertifikat Baptis', blank=True, null=True)
+    baptis_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='Nama Baptis')
     baptis_anniversary = models.DateField(null=True, blank=True, verbose_name='Tanggal Peringatan')
     baptis_date = models.DateField(null=True, blank=True, verbose_name='Tanggal Baptis')
 
@@ -55,7 +64,10 @@ class Member(models.Model):
         if self.is_klerus:
             complete_name = '%s %s %s' % (self.jabatan_klerus, self.baptis_name, self.name)
         else:
-            complete_name = '%s %s' % (self.baptis_name, self.name)
+            if self.baptis_name is not None:
+                complete_name = '%s %s' % (self.baptis_name, self.name)
+            else:
+                complete_name = '%s' % (self.name)
 
         return complete_name
 
@@ -67,6 +79,9 @@ class Member(models.Model):
             self.mother = self.mother.upper()
         if self.pob is not None:
             self.pob = self.pob.upper()
+
+        if self.baptis_name is not None:
+            self.baptis_name = self.baptis_name.upper()
 
         return super(Member, self).save(*args, **kwargs)
 

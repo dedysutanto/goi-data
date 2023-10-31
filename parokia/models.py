@@ -1,14 +1,20 @@
 from django.db import models
-from django_google_maps import fields as map_fields
+#from django_google_maps import fields as map_fields
+from django.utils.translation import gettext_lazy as _
 from klerus.models import Klerus
 from member.models import Member
 
 
 class Parokia(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Nama Parokia')
-    code = models.CharField(max_length=10, unique=True, verbose_name='Kode Parokia')
-    address = map_fields.AddressField(max_length=200, blank=True, verbose_name='Alamat')
-    geolocation = map_fields.GeoLocationField(max_length=100, blank=True, verbose_name='Koordinat GoogleMap')
+    name = models.CharField(max_length=200, verbose_name='Nama Parokia')
+    code = models.CharField(max_length=10, 
+                            unique=True, 
+                            verbose_name=_('Kode Parokia'),
+                            help_text=_('Kode Parokia bisa menggunakan singkatan. Contoh: JSPP untuk Js Petrus dan Paulus'))
+    address = models.CharField(max_length=250, blank=True, verbose_name='Alamat')
+    geolocation = models.CharField(max_length=250, blank=True, verbose_name='Koordinat GoogleMap')
+    #address = map_fields.AddressField(max_length=200, blank=True, verbose_name='Alamat')
+    #geolocation = map_fields.GeoLocationField(max_length=100, blank=True, verbose_name='Koordinat GoogleMap')
     email = models.EmailField(max_length=50, blank=True, verbose_name='Alamat Email')
     phone = models.CharField(max_length=20, verbose_name='Telpon/HP', blank=True)
     klerus_1 = models.ForeignKey(
@@ -46,10 +52,12 @@ class Parokia(models.Model):
 
 
 class Komox(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Nama Komox')
+    name = models.CharField(max_length=200, verbose_name='Nama Komox')
     code = models.CharField(max_length=10, unique=True, verbose_name='Kode Komox')
-    address = map_fields.AddressField(max_length=200, blank=True, verbose_name='Alamat')
-    geolocation = map_fields.GeoLocationField(max_length=100, blank=True, verbose_name='Koordinat GoogleMap')
+    address = models.CharField(max_length=250, blank=True, verbose_name='Alamat')
+    geolocation = models.CharField(max_length=250, blank=True, verbose_name='Koordinat GoogleMap')
+    #address = map_fields.AddressField(max_length=200, blank=True, verbose_name='Alamat')
+    #geolocation = map_fields.GeoLocationField(max_length=100, blank=True, verbose_name='Koordinat GoogleMap')
     email = models.EmailField(max_length=50, blank=True, verbose_name='Alamat Email')
     phone = models.CharField(max_length=20, verbose_name='Telpon/HP', blank=True)
     koordinator_1 = models.ForeignKey(

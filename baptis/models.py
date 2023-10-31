@@ -13,14 +13,15 @@ class Baptis(models.Model):
         null=True,
         blank=True
     )
-    number = models.CharField(max_length=30, unique=True, verbose_name='Nomor Sertifikat Baptis')
+    #number = models.CharField(max_length=30, unique=True, verbose_name='Nomor Sertifikat Baptis')
+    number = models.CharField(max_length=30, blank=True, null=True, verbose_name='Nomor Sertifikat Baptis')
     member = models.ForeignKey(
         Member,
         on_delete=models.RESTRICT,
         related_name='baptis_member_related',
         verbose_name='Yang Di Baptis',
-        null=True,
-        blank=True
+        #null=True,
+        #blank=True
     )
     baptis_parent = models.ForeignKey(
         Member,
@@ -37,7 +38,7 @@ class Baptis(models.Model):
         null=True,
         blank=True
     )
-    baptis_name = models.CharField(max_length=30, blank=True, verbose_name='Nama Baptis')
+    baptis_name = models.CharField(max_length=50, verbose_name='Nama Baptis')
     baptis_anniversary = models.DateField(null=True, blank=True, verbose_name='Tanggal Peringatan')
     baptis_date = models.DateField(null=True, blank=True, verbose_name='Tanggal Baptis')
 
@@ -53,8 +54,10 @@ class Baptis(models.Model):
         return '%s' % self.number
     
     def save(self, *args, **kwargs):
-        self.number = self.number.upper()
+        if self.number is not None:
+            self.number = self.number.upper()
         self.baptis_name = self.baptis_name.upper()
+        '''
         try:
             member = Member.objects.get(id=self.member.id)
             member.baptis_number = self.number
@@ -64,4 +67,5 @@ class Baptis(models.Model):
             member.save()
         except ObjectDoesNotExist:
             raise ValidationError({'member': [_('Yang Dibaptis Tidak Boleh Kosong!')]})
+        '''
         return super(Baptis, self).save(*args, **kwargs)

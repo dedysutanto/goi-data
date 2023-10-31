@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import Parokia, Komox
-from django_google_maps import widgets as map_widgets
-from django_google_maps import fields as map_fields
+#from django_google_maps import widgets as map_widgets
+#from django_google_maps import fields as map_fields
 from django import forms
 
 
@@ -10,6 +10,7 @@ class ParokiaAdmin(admin.ModelAdmin):
     search_fields = ('name', 'code')
     list_display = ['name', 'code', 'address', 'klerus_1', 'klerus_2']
 
+    '''
     formfield_overrides = {
         map_fields.AddressField: {
           'widget': map_widgets.GoogleMapsAddressWidget(attrs={
@@ -25,6 +26,7 @@ class ParokiaAdmin(admin.ModelAdmin):
             })
         },
     }
+    '''
 
     class Meta:
         model = Parokia
@@ -35,6 +37,7 @@ class KomoxAdmin(admin.ModelAdmin):
     search_fields = ('name', 'code')
     list_display = ['name', 'code', 'address', 'koordinator_1', 'koordinator_2']
 
+    '''
     formfield_overrides = {
         map_fields.AddressField: {
           'widget': map_widgets.GoogleMapsAddressWidget(attrs={
@@ -50,6 +53,7 @@ class KomoxAdmin(admin.ModelAdmin):
             })
         },
     }
+    '''
 
     class Meta:
         model = Komox

@@ -29,21 +29,22 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't')
-PRODUCTION = os.getenv('PRODUCTION', 'False').lower() in ('true', '1', 't')
+#PRODUCTION = os.getenv('PRODUCTION', 'False').lower() in ('true', '1', 't')
 
 ALLOWED_HOSTS = [str(os.getenv('ALLOWED_HOSTS'))]
 
 # Application definition
 
 INSTALLED_APPS = [
+    'dashboard',
     'landing',
     'klerus',
     'parokia',
     'member',
     'baptis',
     'imagekit',
-    'django_crontab',
-    'django_google_maps',
+    #'django_crontab',
+    #'django_google_maps',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,6 +52,20 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dbbackup',
+    'wagtail.contrib.forms',
+    'wagtail.contrib.redirects',
+    'wagtail.embeds',
+    'wagtail.sites',
+    'wagtail.users',
+    'wagtail.snippets',
+    'wagtail.documents',
+    'wagtail.images',
+    'wagtail.search',
+    'wagtail.admin',
+    'wagtail',
+    'modelcluster',
+    'taggit',
+    'wagtailgeowidget',
 ]
 
 DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
@@ -65,6 +80,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+MIDDLEWARE += ['wagtail.contrib.redirects.middleware.RedirectMiddleware']
 
 ROOT_URLCONF = 'config.urls'
 
@@ -137,7 +154,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#STATIC_ROOT = 'static/'
+# Upload File
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = 'media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -149,13 +170,24 @@ GOOGLE_MAPS_API_KEY = str(os.getenv(('GOOGLE_MAPS_API_KEY')))
 MAPS_CENTER = 'lat: -1.233982000061532, lng: 116.83728437200422'
 
 # Upload File
-MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#MEDIA_URL = 'media/'
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+WAGTAIL_SITE_NAME = 'Gereja Orthodox Indonesia'
+WAGTAILADMIN_BASE_URL = str(os.getenv('WAGTAILADMIN_BASE_URL', 'http://localhost:8001'))
 
 # Only Django 4.0
 CSRF_TRUSTED_ORIGINS = ['https://*.gerejaorthodox.id', 'http://127.0.0.1:8000', 'http://localhost:8000']
 
 # Conjob
-CRONJOBS = [
-    ('0 0 * * *', 'config.cron.dbbackup_job')
-]
+#CRONJOBS = [
+#    ('0 0 * * *', 'config.cron.dbbackup_job')
+#]
+
+# MAP
+GOOGLE_MAPS_V3_APIKEY = str(os.getenv('GOOGLE_MAPS_V3_APIKEY'))
+GOOGLE_MAPS_V3_LANGUAGE = 'id'
+GEO_WIDGET_ZOOM = int(os.getenv('GEO_WIDGET_ZOOM', 15))
+GEO_WIDGET_DEFAULT_LOCATION = {'lat': -6.268851912051042, 'lng': 106.65501443906547}
+
+
