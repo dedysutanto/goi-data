@@ -6,6 +6,9 @@ from django.core.exceptions import ObjectDoesNotExist, ValidationError
 
 
 class Baptis(models.Model):
+    def limit_choices_non_baptis():
+        return {'baptis_name': None}
+
     parokia = models.ForeignKey(
         Parokia,
         on_delete=models.RESTRICT,
@@ -20,6 +23,7 @@ class Baptis(models.Model):
         on_delete=models.RESTRICT,
         related_name='baptis_member_related',
         verbose_name='Yang Di Baptis',
+        limit_choices_to=limit_choices_non_baptis,
         #null=True,
         #blank=True
     )
