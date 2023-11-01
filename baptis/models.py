@@ -23,7 +23,7 @@ class Baptis(models.Model):
         on_delete=models.RESTRICT,
         related_name='baptis_member_related',
         verbose_name='Yang Di Baptis',
-        limit_choices_to=limit_choices_non_baptis,
+        #limit_choices_to=limit_choices_non_baptis,
         #null=True,
         #blank=True
     )
