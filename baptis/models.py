@@ -15,7 +15,7 @@ class Baptis(models.Model):
     )
     #number = models.CharField(max_length=30, unique=True, verbose_name='Nomor Sertifikat Baptis')
     number = models.CharField(max_length=30, blank=True, null=True, verbose_name='Nomor Sertifikat Baptis')
-    member = models.ForeignKey(
+    member = models.OneToOneField(
         Member,
         on_delete=models.RESTRICT,
         related_name='baptis_member_related',
@@ -56,6 +56,7 @@ class Baptis(models.Model):
     def save(self, *args, **kwargs):
         if self.number is not None:
             self.number = self.number.upper()
+
         self.baptis_name = self.baptis_name.upper()
         '''
         try:

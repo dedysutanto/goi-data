@@ -16,7 +16,8 @@ class MemberSVS(ModelAdmin):
     add_to_admin_menu = True
     menu_order = 200
     menu_label = _('Anggota')
-    menu_icon = 'doc-full'
+    menu_icon = 'user'
+    inspect_view_enabled = True
     photo_display = AdminThumbnail(image_field='photo_thumbnail')
     photo_display.short_description = 'Photo Thumbnail'
     list_display = ['__str__', 'photo_display']
@@ -49,6 +50,10 @@ class MemberSVS(ModelAdmin):
                 FieldRowPanel([
                     FieldPanel('baptis_name', read_only=True),
                     FieldPanel('baptis_number', read_only=True),
+                    ]),
+                FieldRowPanel([
+                    FieldPanel('baptis_parent', read_only=True),
+                    FieldPanel('baptis_klerus', read_only=True),
                     ]),
                 FieldRowPanel([
                     FieldPanel('baptis_date', read_only=True),

@@ -36,7 +36,7 @@ class Klerus(models.Model):
             verbose_name=_('Jabatan')
             )
 
-    name = models.ForeignKey(
+    member = models.OneToOneField(
         Member,
         on_delete=models.RESTRICT,
         verbose_name=_('Name Klerus')
@@ -51,16 +51,22 @@ class Klerus(models.Model):
         verbose_name_plural = 'Daftar Klerus'
         
     def __str__(self):
-        return '%s %s %s' % (self.jabatan, self.name.baptis_name, self.name.name)
+        return '%s %s %s' % (self.jabatan, self.member.baptis_name, self.member.name)
+
+    def clean(self):
+        if self.member.baptis_name is None:
+            raise ValidationError(_('Anggota belum di baptis. Tidak bisa di jadikan Klerus'))
 
     def save(self, *args, **kwargs):
+        '''
         try:
-            member = Member.objects.get(id=self.name.id)
+            member = Member.objects.get(id=self.member.id)
             member.is_klerus = True
             member.jabatan_klerus = self.jabatan.name
             member.save()
 
         except ObjectDoesNotExist:
             pass
+        '''
 
         return super(Klerus, self).save(*args, **kwargs)

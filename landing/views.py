@@ -1,6 +1,8 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 from django.views.generic import ListView
 from member.models  import Member
+from baptis.models import Baptis
 from django.db.models import Q
 
 def index(request):
@@ -15,10 +17,11 @@ class IndexView(ListView):
     def get_queryset(self): # new
         query = self.request.GET.get('q')
         if query:
-            object_list = Member.objects.filter(
+            members_list = Member.objects.filter(
                 Q(name__icontains=query) | Q(baptis_name__icontains=query) | Q(jabatan_klerus__icontains=query)
             )
-            return object_list
+
+            return members_list
 
             '''
             combined_list = Member.objects.none()

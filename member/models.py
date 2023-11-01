@@ -49,6 +49,8 @@ class Member(models.Model):
 
     baptis_number = models.CharField(max_length=30, verbose_name='Nomor Sertifikat Baptis', blank=True, null=True)
     baptis_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='Nama Baptis')
+    baptis_klerus = models.CharField(max_length=100, blank=True, null=True, verbose_name='Klerus Yang Membaptis')
+    baptis_parent = models.CharField(max_length=100, blank=True, null=True, verbose_name='Orang Tua Baptis')
     baptis_anniversary = models.DateField(null=True, blank=True, verbose_name='Tanggal Peringatan')
     baptis_date = models.DateField(null=True, blank=True, verbose_name='Tanggal Baptis')
 

@@ -21,12 +21,12 @@ class KlerusSVS(ModelAdmin):
     #add_to_admin_menu = True
     menu_icon = 'user'
     menu_label = _('Klerus')
-    list_display = ['name']
+    list_display = ['member']
 
     panels = [
             MultiFieldPanel([
                 FieldPanel('jabatan'),
-                FieldPanel('name'),
+                FieldPanel('member'),
                 ])
             ]
 
