@@ -47,6 +47,7 @@ class MemberSVS(ModelAdmin):
                 FieldPanel('mother')
                 ], heading=_('Data Orang Tua'), classname='collapsed'),
             MultiFieldPanel([
+                FieldPanel('is_baptis', read_only=True),
                 FieldRowPanel([
                     FieldPanel('baptis_name', read_only=True),
                     FieldPanel('baptis_number', read_only=True),

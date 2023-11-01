@@ -6,6 +6,6 @@ class MemberConfig(AppConfig):
     name = 'member'
     verbose_name = 'Anggota'
 
-    #def ready(self):
-    #    import member.signals
+    def ready(self):
+        import member.signals
 

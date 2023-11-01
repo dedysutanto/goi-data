@@ -53,6 +53,7 @@ class Member(models.Model):
     baptis_parent = models.CharField(max_length=100, blank=True, null=True, verbose_name='Orang Tua Baptis')
     baptis_anniversary = models.DateField(null=True, blank=True, verbose_name='Tanggal Peringatan')
     baptis_date = models.DateField(null=True, blank=True, verbose_name='Tanggal Baptis')
+    is_baptis = models.BooleanField(default=False, verbose_name=_('Sudah Baptis'))
 
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
