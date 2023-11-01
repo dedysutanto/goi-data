@@ -3,6 +3,7 @@ from parokia.models import Parokia
 from member.models import Member
 from klerus.models import Klerus
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
+from django.utils.translation import gettext_lazy as _
 
 
 class Baptis(models.Model):
@@ -60,7 +61,11 @@ class Baptis(models.Model):
         
     def __str__(self):
         return '%s' % self.number
-    
+
+    def clean(self):
+        if self.member == self.baptis_parent:
+            raise ValidationError({'baptis_parent': _('Orang tua baptis tidak boleh sama dengan yang di baptis')})
+
     def save(self, *args, **kwargs):
         if self.number is not None:
             self.number = self.number.upper()
