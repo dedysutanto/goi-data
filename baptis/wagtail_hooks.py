@@ -17,6 +17,7 @@ class BaptisSVS(ModelAdmin):
     menu_order = 300
     menu_label = _('Baptis')
     list_display = ['member', 'baptis_parent', 'baptis_klerus', 'baptis_date', 'parokia']
+    search_fields = ['member__name', 'member__jabatan_klerus', 'member__baptis_name', 'parokia__name']
     panels = [
             MultiFieldPanel([
                 FieldRowPanel([

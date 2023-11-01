@@ -1,5 +1,6 @@
 from django.http import HttpRequest
 from wagtail import hooks
+from .dash_panels import ShortcutsPanel
 
 
 @hooks.register('construct_reports_menu', order=1)
@@ -34,3 +35,6 @@ def add_another_welcome_panel(request, panels):
     panels[:] = [panel for panel in panels if panel.name != "pages_for_moderation"]
     panels[:] = [panel for panel in panels if panel.name != "user_pages_in_workflow_moderation"]
     panels[:] = [panel for panel in panels if panel.name != "locked_pages"]
+
+    panels.append(ShortcutsPanel())
+
