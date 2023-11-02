@@ -36,8 +36,10 @@ ALLOWED_HOSTS = [str(os.getenv('ALLOWED_HOSTS'))]
 # Application definition
 
 INSTALLED_APPS = [
+    'account',
     'dashboard',
     'landing',
+    'koordinator',
     'klerus',
     'parokia',
     'member',
@@ -45,13 +47,6 @@ INSTALLED_APPS = [
     'imagekit',
     #'django_crontab',
     #'django_google_maps',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'dbbackup',
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
     'wagtail.embeds',
@@ -63,14 +58,31 @@ INSTALLED_APPS = [
     'wagtail.search',
     'wagtail.admin',
     'wagtail',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'dbbackup',
     'modelcluster',
     'taggit',
     'wagtailgeowidget',
     'wagtail_modeladmin',
+    'axes',
 ]
 
 DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
 DBBACKUP_STORAGE_OPTIONS = {'location': BASE_DIR / 'backup'}
+
+AUTHENTICATION_BACKENDS = [
+    # AxesStandaloneBackend should be the first backend in the AUTHENTICATION_BACKENDS list.
+    'axes.backends.AxesStandaloneBackend',
+
+    # Django ModelBackend is the default authentication backend.
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -83,13 +95,17 @@ MIDDLEWARE = [
 ]
 
 MIDDLEWARE += ['wagtail.contrib.redirects.middleware.RedirectMiddleware']
+MIDDLEWARE += ('crum.CurrentRequestUserMiddleware',)
+MIDDLEWARE += ('axes.middleware.AxesMiddleware',)
 
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, "templates"),
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -150,6 +166,8 @@ USE_I18N = True
 
 USE_TZ = True
 
+AUTH_USER_MODEL = 'account.User'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -173,6 +191,9 @@ MAPS_CENTER = 'lat: -1.233982000061532, lng: 116.83728437200422'
 # Upload File
 #MEDIA_URL = 'media/'
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+WAGTAIL_USER_EDIT_FORM = 'account.forms.CustomUserEditForm'
+WAGTAIL_USER_CREATION_FORM = 'account.forms.CustomUserCreationForm'
+WAGTAIL_USER_CUSTOM_FIELDS = ['parokia', 'komox']
 
 WAGTAIL_SITE_NAME = 'Gereja Orthodox Indonesia'
 WAGTAILADMIN_BASE_URL = str(os.getenv('WAGTAILADMIN_BASE_URL', 'http://localhost:8001'))
@@ -191,4 +212,11 @@ GOOGLE_MAPS_V3_LANGUAGE = 'id'
 GEO_WIDGET_ZOOM = int(os.getenv('GEO_WIDGET_ZOOM', 15))
 GEO_WIDGET_DEFAULT_LOCATION = {'lat': -6.268851912051042, 'lng': 106.65501443906547}
 
+# AXES
+AXES_COOLOFF_TIME = float(os.getenv('AXES_COOLOFF_TIME', 2))
+AXES_RESET_ON_SUCCESS = True
+#AXES_LOCKOUT_PARAMETERS = ['ip_address', 'username']
+AXES_LOCKOUT_PARAMETERS = ['username']
+AXES_LOCKOUT_TEMPLATE = 'axes/block.html'
+AXES_IPWARE_PROXY_COUNT = int(os.getenv('AXES_IPWARE_PROXY_COUNT', 0))
 

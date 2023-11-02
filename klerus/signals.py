@@ -24,6 +24,12 @@ def update_member(sender, instance, created, **kwargs):
 @receiver(post_save, sender=Klerus)
 def update_member_baptis(sender, instance, created, **kwargs):
     if not created:
+        Member.objects.filter(
+                baptis_klerus_id=instance.id
+                ).update(
+                        baptis_klerus=instance.__str__()
+                        )
+        '''
         try:
             members_baptis = Baptis.objects.filter(baptis_klerus=instance)
             for member_baptis in members_baptis:
@@ -35,4 +41,5 @@ def update_member_baptis(sender, instance, created, **kwargs):
 
         except ObjectDoesNotExist:
             pass
+        '''
 

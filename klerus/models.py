@@ -28,18 +28,20 @@ class JabatanKlerus(models.Model):
         return super(JabatanKlerus, self).save(force_insert, force_update, using, update_fields)
 
 class Klerus(models.Model):
-    #jabatan = models.CharField(max_length=20, choices=JABATAN_KLERUS,
-    #                           default='ROMO', verbose_name='Jabatan Klerus')
+    def limit_member_baptis():
+        return {'is_baptis': True}
+
     jabatan = models.ForeignKey(
             JabatanKlerus,
             on_delete=models.RESTRICT,
-            verbose_name=_('Jabatan')
+            verbose_name=_('Jabatan Klerus')
             )
 
     member = models.OneToOneField(
         Member,
         on_delete=models.RESTRICT,
-        verbose_name=_('Name Klerus')
+        verbose_name=_('Name Klerus'),
+        limit_choices_to=limit_member_baptis
     )
 
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)

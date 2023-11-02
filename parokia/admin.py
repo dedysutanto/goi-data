@@ -8,7 +8,7 @@ from django import forms
 class ParokiaAdmin(admin.ModelAdmin):
     ordering = ['name', 'code']
     search_fields = ('name', 'code')
-    list_display = ['name', 'code', 'address', 'klerus_1', 'klerus_2']
+    list_display = ['name', 'code', 'address']
 
     '''
     formfield_overrides = {
@@ -35,7 +35,7 @@ class ParokiaAdmin(admin.ModelAdmin):
 class KomoxAdmin(admin.ModelAdmin):
     ordering = ['name', 'code']
     search_fields = ('name', 'code')
-    list_display = ['name', 'code', 'address', 'koordinator_1', 'koordinator_2']
+    list_display = ['name', 'code', 'address']
 
     '''
     formfield_overrides = {

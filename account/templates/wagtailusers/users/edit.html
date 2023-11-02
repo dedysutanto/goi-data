@@ -1,0 +1,6 @@
+{% extends "wagtailusers/users/edit.html" %}
+
+{% block extra_fields %}
+    {% include "wagtailadmin/shared/field_as_li.html" with field=form.parokia %}
+    {% include "wagtailadmin/shared/field_as_li.html" with field=form.komox %}
+{% endblock extra_fields %}

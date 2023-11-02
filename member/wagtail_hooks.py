@@ -5,6 +5,7 @@ from wagtail.snippets.models import register_snippet
 from wagtail.snippets.views.snippets import SnippetViewSet
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel, FieldRowPanel, ObjectList
 from wagtailgeowidget import geocoders
+from django.db.models import Q
 from wagtailgeowidget.panels import GeoAddressPanel, GoogleMapsPanel
 from .models import Member
 from imagekit.admin import AdminThumbnail
@@ -20,7 +21,8 @@ class MemberSVS(ModelAdmin):
     inspect_view_enabled = True
     photo_display = AdminThumbnail(image_field='photo_thumbnail')
     photo_display.short_description = 'Photo Thumbnail'
-    list_display = ['__str__', 'photo_display']
+    #list_display = ['__str__', 'dob', 'gender', 'photo_display']
+    list_display = ['__str__', 'address', 'dob', 'gender', 'photo_display']
     #list_display = ['__str__', 'dob']
     list_export = ['__str__', 'dob']
     search_fields = ['name', 'baptis_name', 'jabatan_klerus']
@@ -68,10 +70,27 @@ class MemberSVS(ModelAdmin):
                     ])
                 ], heading=_('Data Jabatan Klerus'), classname='collapsed'),
             MultiFieldPanel([
+                FieldRowPanel([
+                    FieldPanel('parokia', read_only=True),
+                    FieldPanel('komox', read_only=True)
+                    ])
+                ], heading=_('Parokia dan Komox'), classname='collapsed'),
+            MultiFieldPanel([
                 FieldPanel('is_alive'),
                 FieldPanel('photo')
                 ], heading=_('Informasi Tambahan'), classname='collapsed')
             ]
+
+    def get_queryset(self, request):
+        if request.user.is_superuser or request.user.username == 'admin':
+            return Member.objects.all()
+        else:
+            if request.user.komox:
+                return Member.objects.filter(komox_id=request.user.komox.id)
+            elif request.user.parokia:
+                return Member.objects.filter(Q(parokia_id=request.user.parokia.id) | Q(parokia_id=0))
+            else:
+                return Member.objects.none()
 
 #register_snippet(MemberSVS)
 modeladmin_register(MemberSVS)

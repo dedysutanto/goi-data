@@ -102,6 +102,8 @@ code {
                             <th scope="col">Di Baptis Oleh</th>
                             <th scope="col">Orang Tua Baptis</th>
                             <th scope="col">Tanggal Baptis</th>
+                            <th scope="col">Parokia</th>
+                            <th scope="col">Komox</th>
                           </tr>
                         </thead>
                         {% for member in object_list %}
@@ -114,6 +116,8 @@ code {
                               <td>{{ member.baptis_klerus }}</td>
                               <td>{{ member.baptis_parent }}</td>
                               <td>{{ member.baptis_date }}</td>
+                              <td>{{ member.parokia }}</td>
+                              <td>{{ member.komox }}</td>
                           </tr>
                         {% endfor %}
 

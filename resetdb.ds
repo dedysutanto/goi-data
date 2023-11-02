@@ -1,0 +1,12 @@
+#!/bin/bash
+
+rm -fr db.sqlite3
+rm -fr account/migrations/000*
+rm -fr koordinator/migrations/000*
+rm -fr baptis/migrations/000*
+rm -fr member/migrations/000*
+rm -fr parokia/migrations/000*
+rm -fr klerus/migrations/000*
+rm -fr dashboard/migrations/000*
+rm -fr landing/migrations/000*
+

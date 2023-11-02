@@ -49,11 +49,18 @@ class Member(models.Model):
 
     baptis_number = models.CharField(max_length=30, verbose_name='Nomor Sertifikat Baptis', blank=True, null=True)
     baptis_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='Nama Baptis')
+    baptis_klerus_id = models.IntegerField(default=0)
     baptis_klerus = models.CharField(max_length=100, blank=True, null=True, verbose_name='Klerus Yang Membaptis')
+    baptis_parent_id = models.IntegerField(default=0)
     baptis_parent = models.CharField(max_length=100, blank=True, null=True, verbose_name='Orang Tua Baptis')
     baptis_anniversary = models.DateField(null=True, blank=True, verbose_name='Tanggal Peringatan')
     baptis_date = models.DateField(null=True, blank=True, verbose_name='Tanggal Baptis')
     is_baptis = models.BooleanField(default=False, verbose_name=_('Sudah Baptis'))
+
+    parokia_id = models.IntegerField(default=0)
+    parokia = models.CharField(max_length=100, blank=True, null=True, verbose_name='Parokia')
+    komox_id = models.IntegerField(default=0)
+    komox = models.CharField(max_length=100, blank=True, null=True, verbose_name='Komox')
 
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
@@ -87,6 +94,5 @@ class Member(models.Model):
             self.baptis_name = self.baptis_name.upper()
 
         return super(Member, self).save(*args, **kwargs)
-
 
 

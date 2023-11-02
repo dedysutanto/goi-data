@@ -1,9 +1,10 @@
 from django.db import models
-from parokia.models import Parokia
+from parokia.models import Parokia, Komox
 from member.models import Member
 from klerus.models import Klerus
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.utils.translation import gettext_lazy as _
+from crum import get_current_user
 
 
 class Baptis(models.Model):
@@ -13,13 +14,46 @@ class Baptis(models.Model):
     def limit_choices_non_baptis():
         return {'is_baptis': False}
 
+    def limit_choices_parokia():
+        current_user = get_current_user()
+        if current_user.is_superuser or current_user.username == 'admin':
+            return {}
+        else:
+            if current_user.parokia:
+                return {'id': current_user.parokia.id}
+            else:
+                return {'id': 0}
+
+    def limit_choices_komox():
+        current_user = get_current_user()
+        if current_user.is_superuser or current_user.username == 'admin':
+            return {}
+        else:
+            if current_user.komox:
+                return {'id': current_user.komox.id}
+            elif current_user.parokia:
+                return {'parokia': current_user.parokia}
+            else:
+                return {'id': 0}
+
+
     parokia = models.ForeignKey(
         Parokia,
         on_delete=models.RESTRICT,
-        verbose_name='Nama Parokia',
+        verbose_name=_('Parokia'),
         null=True,
-        blank=True
+        blank=True,
+        limit_choices_to=limit_choices_parokia
     )
+
+    komox = models.ForeignKey(
+        Komox,
+        on_delete=models.RESTRICT,
+        verbose_name=_('Komox'),
+        null=True,
+        blank=True,
+        limit_choices_to=limit_choices_komox
+            )
     #number = models.CharField(max_length=30, unique=True, verbose_name='Nomor Sertifikat Baptis')
     number = models.CharField(max_length=30, blank=True, null=True, verbose_name='Nomor Sertifikat Baptis')
     member = models.OneToOneField(

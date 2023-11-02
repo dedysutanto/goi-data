@@ -34,7 +34,7 @@ class KlerusSVS(ModelAdmin):
 #class KlerusSVSG(SnippetViewSetGroup):
 class KlerusSVSG(ModelAdminGroup):
     add_to_admin_menu = True
-    menu_icon = 'group'
+    menu_icon = 'pick'
     menu_label = _('Klerus')
     menu_order = 400
     items = [JabatanKlerusSVS, KlerusSVS]
