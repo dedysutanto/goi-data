@@ -196,7 +196,8 @@ WAGTAIL_USER_CREATION_FORM = 'account.forms.CustomUserCreationForm'
 WAGTAIL_USER_CUSTOM_FIELDS = ['parokia', 'komox']
 
 WAGTAIL_SITE_NAME = 'Gereja Orthodox Indonesia'
-WAGTAILADMIN_BASE_URL = str(os.getenv('WAGTAILADMIN_BASE_URL', 'http://localhost:8001'))
+#WAGTAILADMIN_BASE_URL = str(os.getenv('WAGTAILADMIN_BASE_URL', 'http://localhost:8001'))
+WAGTAILADMIN_BASE_URL = str(os.getenv('WAGTAILADMIN_BASE_URL', 'https://data.gerejaorthodox.id'))
 
 # Only Django 4.0
 CSRF_TRUSTED_ORIGINS = ['https://*.gerejaorthodox.id', 'http://127.0.0.1:8000', 'http://localhost:8000']

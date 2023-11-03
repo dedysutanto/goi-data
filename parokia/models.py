@@ -2,7 +2,9 @@ from django.db import models
 #from django_google_maps import fields as map_fields
 #from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
+#from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from klerus.models import Klerus
+#from koordinator.models import ParokiaKlerus
 from member.models import Member
 from crum import get_current_user
 
