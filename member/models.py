@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 from django.utils.translation import gettext_lazy as _
 #from django_google_maps import fields as map_fields
 from imagekit.models import ImageSpecField
@@ -21,7 +22,7 @@ GENDER = (
 
 
 class Member(models.Model):
-
+    uuid = models.UUIDField(editable=False, default=uuid.uuid4)
     name = models.CharField(max_length=100, unique=True, verbose_name=_('Nama Lengkap'))
     dob = models.DateField(null=True, blank=True, verbose_name=_('Tanggal Lahir'))
     pob = models.CharField(max_length=50, blank=True, verbose_name=_('Tempat Lahir'))

@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 #from django_google_maps import fields as map_fields
 #from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
@@ -10,6 +11,7 @@ from crum import get_current_user
 
 
 class Parokia(models.Model):
+    uuid = models.UUIDField(editable=False, default=uuid.uuid4)
     name = models.CharField(max_length=200, verbose_name='Nama Parokia')
     code = models.CharField(max_length=20, 
                             unique=True, 
@@ -68,6 +70,7 @@ class Komox(models.Model):
             else:
                 return {'id': 0}
 
+    uuid = models.UUIDField(editable=False, default=uuid.uuid4)
     name = models.CharField(max_length=200, verbose_name='Nama Komox')
     code = models.CharField(max_length=20, unique=True, verbose_name='Kode Komox')
     address = models.CharField(max_length=250, blank=True, verbose_name='Alamat')
