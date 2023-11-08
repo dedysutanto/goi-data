@@ -25,7 +25,7 @@ class MemberSVS(ModelAdmin):
     list_display = ['__str__', 'address', 'dob', 'gender', 'photo_display']
     #list_display = ['__str__', 'dob']
     #list_export = ['__str__', 'dob']
-    list_export = ['name', 'baptis_name', 'gender', 'pod', 'dob', 'baptis_date', 'address', 'pekerjaan', 'phone', 'description']
+    list_export = ['name', 'baptis_name', 'gender', 'pob', 'dob', 'baptis_date', 'address', 'pekerjaan', 'phone', 'description']
     search_fields = ['name', 'baptis_name', 'jabatan_klerus']
     #photo_display = AdminThumbnail(image_field='photo_thumbnail')
     panels = [
