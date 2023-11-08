@@ -85,6 +85,8 @@ class Baptis(models.Model):
     baptis_anniversary = models.DateField(null=True, blank=True, verbose_name='Tanggal Peringatan')
     baptis_date = models.DateField(null=True, blank=True, verbose_name='Tanggal Baptis')
 
+    #is_baptis_name_from_name = models.BooleanField(_('Nama baptis diambil dari nama asli'), default=False)
+
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
 

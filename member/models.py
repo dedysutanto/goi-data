@@ -74,6 +74,7 @@ class Member(models.Model):
     baptis_anniversary = models.DateField(null=True, blank=True, verbose_name='Tanggal Peringatan')
     baptis_date = models.DateField(null=True, blank=True, verbose_name='Tanggal Baptis')
     is_baptis = models.BooleanField(default=False, verbose_name=_('Sudah Baptis'))
+    #is_baptis_name_from_name = models.BooleanField(_('Nama baptis diambil dari nama asli'), default=False)
 
     parokia_id = models.IntegerField(default=0)
     parokia = models.CharField(max_length=100, blank=True, null=True, verbose_name='Parokia')
