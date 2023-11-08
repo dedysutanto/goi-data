@@ -5,6 +5,8 @@ from django.utils.translation import gettext_lazy as _
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 
+from data_support.models import Pekerjaan, Pendidikan
+
 
 """
 @receiver(post_save, sender=Klerus)
@@ -42,6 +44,21 @@ class Member(models.Model):
     geolocation = models.CharField(max_length=250, blank=True, verbose_name='Koordinat GoogleMap')
     #address = map_fields.AddressField(max_length=300, blank=True, verbose_name='Alamat')
     #geolocation = map_fields.GeoLocationField(max_length=100, blank=True, verbose_name='Koordinat GoogleMap')
+
+    pendidikan = models.ForeignKey(
+            Pendidikan,
+            on_delete=models.SET_NULL,
+            verbose_name=_('Pendidikan'),
+            blank=True,
+            null=True
+            )
+    pekerjaan = models.ForeignKey(
+            Pekerjaan,
+            on_delete=models.SET_NULL,
+            verbose_name=_('Pekerjaan'),
+            blank=True,
+            null=True
+            )
 
     is_alive = models.BooleanField(default=True, verbose_name='Masih Hidup')
     is_klerus = models.BooleanField(default=False, verbose_name='Klerus')

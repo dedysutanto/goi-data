@@ -1,0 +1,173 @@
+[
+{
+    "model": "data_support.pekerjaan",
+    "pk": 1,
+    "fields": {
+        "name": "Pegawai Negeri/Daerah/Pemerintah/Bumn",
+        "created_at": "2021-05-22T01:10:32.512Z",
+        "updated_at": "2021-05-22T01:10:32.512Z"
+    }
+},
+{
+    "model": "data_support.pekerjaan",
+    "pk": 2,
+    "fields": {
+        "name": "Tni/Polri",
+        "created_at": "2021-05-22T01:11:17.878Z",
+        "updated_at": "2021-05-22T01:11:42.519Z"
+    }
+},
+{
+    "model": "data_support.pekerjaan",
+    "pk": 3,
+    "fields": {
+        "name": "Pegawai Swasta",
+        "created_at": "2021-05-22T01:11:53.341Z",
+        "updated_at": "2021-05-22T01:11:53.341Z"
+    }
+},
+{
+    "model": "data_support.pekerjaan",
+    "pk": 4,
+    "fields": {
+        "name": "Pensiunan - Pegawai Negeri/Daerah/Pemerintah/Bumn/Swasta",
+        "created_at": "2021-05-22T01:12:05.300Z",
+        "updated_at": "2021-05-22T01:12:05.300Z"
+    }
+},
+{
+    "model": "data_support.pekerjaan",
+    "pk": 5,
+    "fields": {
+        "name": "Direktur/Komisaris/Pengusaha Swasta",
+        "created_at": "2021-05-22T01:12:14.124Z",
+        "updated_at": "2021-05-22T01:12:14.124Z"
+    }
+},
+{
+    "model": "data_support.pekerjaan",
+    "pk": 6,
+    "fields": {
+        "name": "Pengusaha Kecil/Petani/Nelayan/Pengrajin",
+        "created_at": "2021-05-22T01:12:24.021Z",
+        "updated_at": "2021-05-22T01:12:24.021Z"
+    }
+},
+{
+    "model": "data_support.pekerjaan",
+    "pk": 7,
+    "fields": {
+        "name": "Pengurus Legislatif/Dpr/Dprd",
+        "created_at": "2021-05-22T01:12:34.641Z",
+        "updated_at": "2021-05-22T01:12:34.641Z"
+    }
+},
+{
+    "model": "data_support.pekerjaan",
+    "pk": 8,
+    "fields": {
+        "name": "Pengurus Lsm/Partai/Organisasi/Yayasan Kemasyarakatan",
+        "created_at": "2021-05-22T01:12:44.373Z",
+        "updated_at": "2021-05-22T01:12:44.373Z"
+    }
+},
+{
+    "model": "data_support.pekerjaan",
+    "pk": 9,
+    "fields": {
+        "name": "Pengurus Organisasi/Yayasan Keagamaan",
+        "created_at": "2021-05-22T01:12:53.452Z",
+        "updated_at": "2021-05-22T01:12:53.452Z"
+    }
+},
+{
+    "model": "data_support.pekerjaan",
+    "pk": 10,
+    "fields": {
+        "name": "Praktisi/Penegak Hukum (Jaksa, Hakim, Lawyer, Notaris Dll)",
+        "created_at": "2021-05-22T01:13:04.972Z",
+        "updated_at": "2021-05-22T01:13:04.972Z"
+    }
+},
+{
+    "model": "data_support.pekerjaan",
+    "pk": 11,
+    "fields": {
+        "name": "Profesional Kesehatan/Dokter",
+        "created_at": "2021-05-22T01:13:17.335Z",
+        "updated_at": "2021-05-22T01:13:17.335Z"
+    }
+},
+{
+    "model": "data_support.pekerjaan",
+    "pk": 12,
+    "fields": {
+        "name": "Profesi Pendidikan - Dosen/Guru",
+        "created_at": "2021-05-22T01:13:24.621Z",
+        "updated_at": "2021-05-22T01:13:24.621Z"
+    }
+},
+{
+    "model": "data_support.pekerjaan",
+    "pk": 13,
+    "fields": {
+        "name": "Profesional, Designer, Arsitek, Akuntan Dan Konsultan Lainnya",
+        "created_at": "2021-05-22T01:13:34.227Z",
+        "updated_at": "2021-05-22T01:13:34.227Z"
+    }
+},
+{
+    "model": "data_support.pekerjaan",
+    "pk": 14,
+    "fields": {
+        "name": "Seniman/Artis",
+        "created_at": "2021-05-22T01:13:42.275Z",
+        "updated_at": "2021-05-22T01:13:42.275Z"
+    }
+},
+{
+    "model": "data_support.pekerjaan",
+    "pk": 15,
+    "fields": {
+        "name": "Tenaga Lepas/Kecil: Buruh/Asn/Satpam/Satpol Pp",
+        "created_at": "2021-05-22T01:13:51.128Z",
+        "updated_at": "2021-05-22T01:13:51.128Z"
+    }
+},
+{
+    "model": "data_support.pekerjaan",
+    "pk": 16,
+    "fields": {
+        "name": "Pelajar/Mahasiswa",
+        "created_at": "2021-05-22T01:14:00.195Z",
+        "updated_at": "2021-05-22T01:14:00.195Z"
+    }
+},
+{
+    "model": "data_support.pekerjaan",
+    "pk": 17,
+    "fields": {
+        "name": "Ibu Rumah Tangga",
+        "created_at": "2021-05-22T01:14:22.311Z",
+        "updated_at": "2021-05-22T01:14:22.311Z"
+    }
+},
+{
+    "model": "data_support.pekerjaan",
+    "pk": 18,
+    "fields": {
+        "name": "Belum/Tidak Bekerja",
+        "created_at": "2021-05-22T01:14:29.820Z",
+        "updated_at": "2021-05-22T01:14:29.820Z"
+    }
+},
+{
+    "model": "data_support.pekerjaan",
+    "pk": 19,
+    "fields": {
+        "name": "Lainnya",
+        "created_at": "2021-05-22T01:14:40.770Z",
+        "updated_at": "2021-05-22T01:14:40.770Z"
+    }
+}
+]

@@ -24,7 +24,8 @@ class MemberSVS(ModelAdmin):
     #list_display = ['__str__', 'dob', 'gender', 'photo_display']
     list_display = ['__str__', 'address', 'dob', 'gender', 'photo_display']
     #list_display = ['__str__', 'dob']
-    list_export = ['__str__', 'dob']
+    #list_export = ['__str__', 'dob']
+    list_export = ['name', 'baptis_name', 'gender', 'pod', 'dob', 'baptis_date', 'address', 'pekerjaan', 'phone', 'description']
     search_fields = ['name', 'baptis_name', 'jabatan_klerus']
     #photo_display = AdminThumbnail(image_field='photo_thumbnail')
     panels = [
@@ -48,6 +49,10 @@ class MemberSVS(ModelAdmin):
                 FieldPanel('father'),
                 FieldPanel('mother')
                 ], heading=_('Data Orang Tua'), classname='collapsed'),
+            MultiFieldPanel([
+                FieldPanel('pendidikan'),
+                FieldPanel('pekerjaan')
+                ], heading=_('Pendidikan dan Pekerjaan'), classname='collapsed'),
             MultiFieldPanel([
                 FieldPanel('is_baptis', read_only=True),
                 FieldRowPanel([
@@ -77,7 +82,8 @@ class MemberSVS(ModelAdmin):
                 ], heading=_('Parokia dan Komox'), classname='collapsed'),
             MultiFieldPanel([
                 FieldPanel('is_alive'),
-                FieldPanel('photo')
+                FieldPanel('photo'),
+                FieldPanel('description'),
                 ], heading=_('Informasi Tambahan'), classname='collapsed')
             ]
 
