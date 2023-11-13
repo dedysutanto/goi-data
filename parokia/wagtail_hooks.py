@@ -128,7 +128,7 @@ class ParokiaSVS(ModelAdmin):
     menu_icon = 'home'
     #menu_order = 100
     menu_label = _('Parokia')
-    list_display = ['name', 'code', 'address' ]
+    list_display = ['name', 'code', 'address', 'description' ]
     search_fields = ['name', 'code', 'address']
     panels = [
             MultiFieldPanel([
