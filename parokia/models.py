@@ -43,6 +43,8 @@ class Parokia(models.Model):
     )
     '''
 
+    description = models.TextField(blank=True, verbose_name='Catatan')
+
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
 

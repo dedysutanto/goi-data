@@ -139,6 +139,13 @@ class ParokiaSVS(ModelAdmin):
                 GeoAddressPanel('address', geocoder=geocoders.GOOGLE_MAPS),
                 GoogleMapsPanel('geolocation', address_field='address'),
                 ], heading=_('Alamat')),
+            MultiFieldPanel([
+                FieldRowPanel([
+                    FieldPanel('email'),
+                    FieldPanel('phone'),
+                    ]),
+                FieldPanel('description'),
+                ], heading=_('Email, Phone dan Catatan')),
             ]
 
 class KomoxSVS(ModelAdmin):
