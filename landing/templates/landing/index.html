@@ -111,11 +111,19 @@ code {
                               {% if member.is_klerus %}
                               <td>{{ member.jabatan_klerus }} {{ member.baptis_name}} {{ member.name }}</td>
                               {% else %}
+                                {% if member.baptis_name in member.name %}
+                              <td>{{ member.name }}</td>
+                                {% else %}
                               <td>{{ member.baptis_name}} {{ member.name }}</td>
+                                {% endif %}
                               {% endif %}
                               <td>{{ member.baptis_klerus }}</td>
                               <td>{{ member.baptis_parent }}</td>
+                              {% if member.baptis_number %}
+                              <td>{{ member.baptis_date }}<br />{{ member.baptis_nu,ber }}</td>
+                              {% else %}
                               <td>{{ member.baptis_date }}</td>
+                              {% endif %}
                               <td>{{ member.parokia }}</td>
                               <td>{{ member.komox }}</td>
                           </tr>
