@@ -99,6 +99,7 @@ code {
                         <thead>
                           <tr>
                             <th scope="col">Nama</th>
+                            <th scope="col">STR</th>
                             <th scope="col">Di Baptis Oleh</th>
                             <th scope="col">Orang Tua Baptis</th>
                             <th scope="col">Tanggal Baptis</th>
@@ -109,14 +110,15 @@ code {
                         {% for member in object_list %}
                           <tr>
                               {% if member.is_klerus %}
-                              <td>{{ member.jabatan_klerus }} {{ member.baptis_name}} {{ member.name }}</td>
+                              <td><small>{{ member.jabatan_klerus }} {{ member.baptis_name}} {{ member.name }}</small></td>
                               {% else %}
                                 {% if member.baptis_name in member.name %}
-                              <td>{{ member.name }}</td>
+                                <td><small>{{ member.name }}</small></td>
                                 {% else %}
-                              <td>{{ member.baptis_name}} {{ member.name }}</td>
+                                <td><small>{{ member.baptis_name}} {{ member.name }}</small></td>
                                 {% endif %}
                               {% endif %}
+                              <td><small>member.complete_name</small></td>
                               <td><small>{{ member.baptis_klerus }}</small></td>
                               <td><small>{{ member.baptis_parent }}</small></td>
                               {% if member.baptis_number %}

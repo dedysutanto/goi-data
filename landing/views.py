@@ -21,6 +21,9 @@ class IndexView(ListView):
                 Q(name__icontains=query) | Q(baptis_name__icontains=query) | Q(jabatan_klerus__icontains=query)
             )
 
+            for i in range(len(members_list)):
+                members_list[i].complete_name = members_list[i].__str__()
+
             return members_list
 
             '''
