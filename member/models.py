@@ -101,6 +101,9 @@ class Member(models.Model):
             else:
                 complete_name = '%s' % (self.name)
 
+        if not self.is_alive:
+            complete_name = '{} (ALM)'.format(complete_name)
+
         return complete_name
 
     def save(self, *args, **kwargs):
