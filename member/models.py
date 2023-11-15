@@ -94,7 +94,10 @@ class Member(models.Model):
             complete_name = '%s %s %s' % (self.jabatan_klerus, self.baptis_name, self.name)
         else:
             if self.baptis_name is not None:
-                complete_name = '%s %s' % (self.baptis_name, self.name)
+                if self.baptis_name in self.name:
+                    complete_name = '%s' % (self.name)
+                else:
+                    complete_name = '%s %s' % (self.baptis_name, self.name)
             else:
                 complete_name = '%s' % (self.name)
 
