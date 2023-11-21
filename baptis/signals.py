@@ -32,7 +32,9 @@ def update_member(sender, instance, created, **kwargs):
 
     if instance.baptis_klerus is not None:
         member.baptis_klerus_id = instance.baptis_klerus.id
-        member.baptis_klerus = instance.baptis_klerus.member.__str__()
+        klerus = Klerus.objects.get(id=instance.baptis_klerus.id)
+        #member.baptis_klerus = instance.baptis_klerus.__str__()
+        member.baptis_klerus = klerus.__str__()
     else:
         member.baptis_klerus_id = 0
         member.baptis_klerus = None
