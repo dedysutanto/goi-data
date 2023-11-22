@@ -1,3 +1,4 @@
+from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist, ValidationError
 from django.db import models
 import uuid
 from django.utils.translation import gettext_lazy as _
@@ -106,6 +107,17 @@ class Member(models.Model):
             complete_name = '{} (ALM)'.format(complete_name)
 
         return complete_name
+
+    def clean(self):
+        try:
+            is_member = Member.objects.get(name__icontains=self.name)
+            raise ValidationError({'name': 'Nama ini sudah pernah di input. Apakah sama?'})
+
+        except MultipleObjectsReturned:
+            raise ValidationError({'name': 'Nama ini sudah pernah di input. Apakah sama?'})
+
+        except ObjectDoesNotExist:
+            pass
 
     def save(self, *args, **kwargs):
         self.name = self.name.upper()
