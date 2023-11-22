@@ -61,6 +61,7 @@ class Member(models.Model):
             )
 
     is_alive = models.BooleanField(default=True, verbose_name='Masih Hidup')
+    is_active = models.BooleanField(default=True, verbose_name='Masih Bersama')
     is_klerus = models.BooleanField(default=False, verbose_name='Klerus')
     jabatan_klerus = models.CharField(max_length=20, blank=True, verbose_name='Jabatan Klerus')
     description = models.TextField(blank=True, verbose_name='Catatan')

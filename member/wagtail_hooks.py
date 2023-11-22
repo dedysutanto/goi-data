@@ -22,7 +22,8 @@ class MemberSVS(ModelAdmin):
     photo_display = AdminThumbnail(image_field='photo_thumbnail')
     photo_display.short_description = 'Photo Thumbnail'
     #list_display = ['__str__', 'dob', 'gender', 'photo_display']
-    list_display = ['__str__', 'address', 'dob', 'gender', 'photo_display']
+    #list_display = ['__str__', 'address', 'dob', 'gender', 'photo_display']
+    list_display = ['__str__', 'address', 'dob', 'gender', 'description']
     #list_display = ['__str__', 'dob']
     #list_export = ['__str__', 'dob']
     list_export = ['name', 'baptis_name', 'gender', 'pob', 'dob', 'baptis_date', 'address', 'pekerjaan', 'phone', 'description']
@@ -82,8 +83,9 @@ class MemberSVS(ModelAdmin):
                 ], heading=_('Parokia dan Komox'), classname='collapsed'),
             MultiFieldPanel([
                 FieldPanel('is_alive'),
-                FieldPanel('photo'),
+                FieldPanel('is_active'),
                 FieldPanel('description'),
+                FieldPanel('photo'),
                 ], heading=_('Informasi Tambahan'), classname='collapsed')
             ]
 
