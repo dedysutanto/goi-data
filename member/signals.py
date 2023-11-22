@@ -28,6 +28,7 @@ def update_member_if_baptis_parent(sender, instance, created, **kwargs):
 def update_member_baptis_by_klerus(sender, instance, created, **kwargs):
     if not created:
         if instance.is_klerus:
+            '''
             Member.objects.filter(
                     baptis_klerus_id=instance.id
                     ).update(
@@ -42,5 +43,4 @@ def update_member_baptis_by_klerus(sender, instance, created, **kwargs):
                         ).update(
                                 baptis_klerus=klerus.__str__()
                                 )
-            '''
 
