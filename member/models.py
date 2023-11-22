@@ -109,15 +109,15 @@ class Member(models.Model):
         return complete_name
 
     def clean(self):
-        try:
-            is_member = Member.objects.get(name__icontains=self.name)
-            raise ValidationError({'name': 'Nama ini sudah pernah di input. Apakah sama?'})
+        if not self.id:
+            try:
+                is_member = Member.objects.get(name__icontains=self.name)
+                raise ValidationError({'name': 'Nama ini sudah pernah di input. Apakah sama?'})
 
-        except MultipleObjectsReturned:
-            raise ValidationError({'name': 'Nama ini sudah pernah di input. Apakah sama?'})
-
-        except ObjectDoesNotExist:
-            pass
+            except MultipleObjectsReturned:
+                raise ValidationError({'name': 'Nama ini sudah pernah di input. Apakah sama?'})
+            except ObjectDoesNotExist:
+                pass
 
     def save(self, *args, **kwargs):
         self.name = self.name.upper()
