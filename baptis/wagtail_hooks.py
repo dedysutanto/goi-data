@@ -15,7 +15,7 @@ class BaptisSVS(ModelAdmin):
     icon = 'calendar-check'
     menu_icon = 'calendar-check'
     menu_order = 300
-    menu_label = _('Baptis')
+    menu_label = _('Sakramen Baptis')
     list_display = ['member', 'baptis_parent', 'baptis_klerus', 'baptis_date', 'parokia', 'komox']
     search_fields = ['member__name', 'member__jabatan_klerus', 'member__baptis_name', 'parokia__name']
     panels = [

@@ -126,6 +126,20 @@ code {
 
                 {% endif %} 
 
+                {% for member in object_list %}
+                    {% if member.is_nikah %}
+                    <h3>Sakramen Pernikahan</h3>
+                    <ul>
+                        <li><small>Suami: {{ member.complete_name }}</small></li>
+                        <li><small>Istri: {{ member.nikah_istri }}</small></li>
+                        <li><small>Klerus: {{ member.nikah_klerus }}</small></li>
+                        <li><small>Parokia: {{ member.nikah_parokia }}</small></li>
+                        <li><small>Tanggal: {{ member.nikah_date }}</small></li>
+                        <li><small>No Sertifikat: {{ member.nikah_number }}</small></li>
+                    </ul>
+                    {% endif %}
+                {% endfor %}
+
             </div>
         </main>
 

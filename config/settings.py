@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'parokia',
     'member',
     'baptis',
+    'nikah',
     'imagekit',
     #'django_crontab',
     #'django_google_maps',
